@@ -161,6 +161,7 @@
     <Content Include="MP.Master" />
     <Content Include="Yafre\CRUD.aspx" />
     <Content Include="Yafre\index.aspx" />
+    <Content Include="Yafre\index.html" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
