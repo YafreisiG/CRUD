@@ -1,0 +1,48 @@
+USE CRUD
+
+CREATE TABLE Usuarios(
+Id_Usuario int identity(1,1),
+Nombre_Completo varchar(max),
+Edad int,
+Correo varchar(max),
+Fecha_Nacimiento date
+)
+
+create procedure sp_load as begin
+select * from Usuarios end
+
+--Creacion de crud de crear, actualizar, eliminar, leer 
+create procedure yg_create
+@Nombre_Completo varchar(max),
+@Edad int,
+@Correo varchar(max),
+@Fecha date
+as begin
+insert into Usuarios values (@Nombre_Completo, @Edad, @correo, @Fecha)
+end
+
+create procedure yg_read
+@Id int
+as begin
+select *from Usuarios where Id_Usuario=@Id
+end
+
+create procedure yg_update
+@Id int,
+@Nombre_Completo varchar(max),
+@Edad int,
+@Correo varchar(max),
+@Fecha date
+as begin
+update Usuarios set Nombre_Completo=@Nombre_Completo, Edad=@Edad, Correo=@correo, Fecha_Nacimiento=@Fecha
+where Id_Usuario=@id
+end
+
+
+create procedure yg_Delete
+@Id int
+as begin
+delete from Usuarios where Id_Usuario=@Id
+end
+
+select *from Usuarios
