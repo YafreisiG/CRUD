@@ -16,9 +16,12 @@ namespace CRUP_Básico.Yafre
         readonly SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["conexion"].ConnectionString);
         public static string sID = "-1";
         public static string sOpc = "";
+      
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            lblError.Visible = false;
+
             if (Request.QueryString["id"] != null)
             {
                 sID = Request.QueryString["id"].ToString();
@@ -67,12 +70,46 @@ namespace CRUP_Básico.Yafre
             tbdate.Text = d.ToString("dd/mm/yyyy");
             con.Close();
 
-
-
-
         }
+
+        bool ValidarCampos()
+        {
+            if (string.IsNullOrWhiteSpace(tbnombre.Text) ||
+                string.IsNullOrWhiteSpace(tbedad.Text) ||
+                string.IsNullOrWhiteSpace(tbemail.Text) ||
+                string.IsNullOrWhiteSpace(tbdate.Text))
+            {
+                lblError.Text = "Por favor, complete todos los campos.";
+                lblError.Visible = true;
+                return false;
+            }
+
+            int edad;
+            if (!int.TryParse(tbedad.Text, out edad))
+            {
+                lblError.Text = "Por favor, ingrese una edad válida.";
+                lblError.Visible = true;
+                return false;
+            }
+
+            DateTime fecha;
+            if (!DateTime.TryParseExact(tbdate.Text, "dd/MM/yyyy", null, System.Globalization.DateTimeStyles.None, out fecha))
+            {
+                lblError.Text = "Por favor, ingrese una fecha válida en formato dd/MM/yyyy.";
+                lblError.Visible = true;
+                return false;
+            }
+
+            return true;
+        }
+
+
+
         protected void BtnCreate_Click(object sender, EventArgs e)
         {
+            if (!ValidarCampos())
+                return;
+
             SqlCommand cmd = new SqlCommand("yg_create", con);
             con.Open();
             cmd.CommandType = CommandType.StoredProcedure;
@@ -84,6 +121,7 @@ namespace CRUP_Básico.Yafre
             cmd.Clone();
             Response.Redirect("index.aspx");
         }
+
 
         protected void BtnUpdate_Click(object sender, EventArgs e)
         {

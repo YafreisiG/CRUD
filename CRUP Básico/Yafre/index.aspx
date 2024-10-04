@@ -13,7 +13,7 @@
     <div class="container">
         <div class="row">
             <div class="col align-self-end">
-                <asp:Button runat="server" ID="BtnCreate" CssClass="btn btn-sucess form-control" text="Create" OnClick="BtnCreate_Click"/>
+                <asp:Button runat="server" ID="BtnCreate" CssClass="btn btn-success form-control" text="Create" OnClick="BtnCreate_Click"/>
             </div>
         </div>
     </div>

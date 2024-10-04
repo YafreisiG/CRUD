@@ -7,6 +7,7 @@
     <br />
     <div class="mx-auto" style="width:250px" >
         <asp:Label runat="server" CssClass="h2" ID="lbtitulo"></asp:Label>
+        <asp:Label ID="lblError" runat="server" ForeColor="Red" Visible="false"></asp:Label>
     </div> 
     
     <div class="d-flex justify-content-center align-items-center">
